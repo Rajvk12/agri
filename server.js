@@ -1,11 +1,10 @@
-// server.js - Robust AgriXpress Backend (Node.js + Express + MongoDB/Mongoose + Twilio SMS)
+// server.js - Robust AgriXpress Backend (Node.js + Express + MongoDB/Mongoose)
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const bodyParser = require('body-parser');
-const twilio = require('twilio');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
