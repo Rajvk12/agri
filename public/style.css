@@ -1,0 +1,656 @@
+html {
+    scroll-behavior: smooth;
+  }
+  
+body{
+    margin: 0;
+    padding: 0;
+    border: none;
+}/* Navbar Fixes */
+
+.navbar {
+    margin: 0;
+    padding: 0;
+    border: none;
+    position: relative;
+    background: rgba(0, 0, 0, 0.5); /* Transparent Strip */
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;;
+    height: 60px; /* Fixed navbar height */
+}
+
+.navbar-brand img {
+    position: absolute;
+    top: 50%;
+    left: -10px; /* Adjust as needed */
+    transform: translateY(-50%);
+    width: 260px; /* Adjust size */
+    height: auto;
+    z-index: 10;
+}
+
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+}
+
+/* Navbar Links */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    padding: 0;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-size: 19px;
+    transition: color 0.2s;
+    font-weight: 600;
+}
+
+.nav-links a:hover {
+    color: #75c043;
+}
+
+/* Background Image */
+.bg-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -5;
+}
+
+/* Center Title */
+.site-title {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+.site-title img {
+    width: 450px;  /* Adjust size as needed */
+    height: auto;
+}
+
+/* Center Subtitle */
+.site-subtitle {
+    font-size: 20px;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+    text-transform: uppercase;
+    color: rgb(249, 249, 249);
+    text-shadow: 4px 4px 6px rgba(10, 10, 10, 0.9);
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    white-space: nowrap; /* Prevent text from breaking */
+    max-width: 90vw;
+}
+
+/* Center Buttons */
+.header {
+    position: absolute;
+    top: 65%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    gap: 30px;
+    z-index: 9999;
+}
+
+
+.btn {
+    position: relative;
+    padding: 15px 45px; /* Increased padding for a bigger button */
+    border: none;
+    border-radius: 12px; /* Slightly more rounded corners */
+    cursor: pointer;
+    font-size: 20px; /* Bigger text */
+    font-weight: 500; /* Bolder text */
+    color: rgb(0, 0, 0);
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+.btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease-in-out;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+.btn:hover {
+    transform: scale(1.12); /* Slightly more pronounced hover effect */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+.btn-login {
+    background: linear-gradient(135deg, #3498db, #2980b9) !important;
+    padding: 10px 45px !important;
+    font-size: 20px !important;
+    font-weight: 500 !important;
+    border-radius: 12px !important;
+}
+
+/* Login Button */
+
+/* Sign Up Button */
+.btn-signup {
+    background: linear-gradient(135deg, #2ecc71, #27ae60);
+    padding: 14px 45px !important;
+    font-size: 20px !important;
+    font-weight: 500 !important;
+    border-radius: 12px !important;
+}
+
+.role-loading {
+    margin: 5px 0;
+    color: #666;
+}
+
+.role-loading small {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.role-loading small::after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    border: 2px solid #ccc;
+    border-top-color: #666;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+#role-error {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 5px;
+}
+
+select:disabled {
+    background-color: #e9ecef;
+    cursor: not-allowed;
+}
+
+.email-verify-group {
+    display: flex;
+    gap: 10px;
+}
+
+.email-verify-group input {
+    flex: 1;
+}
+
+.email-verify-group button {
+    white-space: nowrap;
+    min-width: 80px;
+}
+
+.btn-outline-primary {
+    color: #007bff;
+    border-color: #007bff;
+    background-color: transparent;
+}
+
+.btn-outline-primary:hover {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-outline-primary:disabled {
+    color: #6c757d;
+    border-color: #6c757d;
+    cursor: not-allowed;
+}
+
+.roles-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.role-card {
+    background-color: #f8f9fa;
+    border: 2px solid #dee2e6;
+    border-radius: 8px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.role-card:hover {
+    background-color: #e9ecef;
+    border-color: #adb5bd;
+}
+
+.role-card.selected {
+    background-color: #e3f2fd;
+    border-color: #2196f3;
+    color: #1976d2;
+}
+
+.role-card i {
+    font-size: 1.2em;
+}
+
+.selected-role {
+    padding: 10px;
+    border-radius: 6px;
+    background-color: #f8f9fa;
+    margin-top: 5px;
+    font-weight: 500;
+}
+
+.selected-role.has-role {
+    background-color: #e3f2fd;
+    color: #1976d2;
+}
+
+/* Role icons */
+.role-icon {
+    width: 24px;
+    height: 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: #e9ecef;
+    margin-right: 8px;
+}
+
+.role-card.selected .role-icon {
+    background-color: #2196f3;
+    color: white;
+}
+
+/* Loading animation */
+.loading-roles {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    color: #666;
+}
+
+.loading-roles::after {
+    content: '';
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+    border: 2px solid #ccc;
+    border-top-color: #666;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Verify button states */
+.btn-verifying {
+    background-color: #f8f9fa !important;
+    border-color: #6c757d !important;
+    color: #6c757d !important;
+    cursor: not-allowed !important;
+}
+
+.btn-verified {
+    background-color: #28a745 !important;
+    border-color: #28a745 !important;
+    color: white !important;
+}
+
+/* Password input group */
+.password-input-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-input-group input {
+    padding-right: 40px;
+}
+
+.password-input-group .password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    padding: 0;
+    color: #6c757d;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+}
+
+.password-input-group .password-toggle:hover {
+    color: #495057;
+}
+
+.password-input-group .password-toggle:focus {
+    outline: none;
+    color: #007bff;
+}
+
+/* Placeholder styles */
+::placeholder {
+    color: #adb5bd;
+    opacity: 1;
+}
+
+:-ms-input-placeholder {
+    color: #adb5bd;
+}
+
+::-ms-input-placeholder {
+    color: #adb5bd;
+}
+
+/* Input focus styles */
+.form-control:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Add spacing between form groups */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+/* Style for password toggle icon */
+.password-toggle i {
+    font-size: 1rem;
+}
+
+/* Role tags for signup */
+.selected-roles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 10px 0;
+    min-height: 40px;
+    padding: 5px;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    background-color: #fff;
+}
+
+.role-tag {
+    display: inline-flex;
+    align-items: center;
+    background-color: #e3f2fd;
+    border: 1px solid #90caf9;
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 0.9rem;
+    color: #1976d2;
+    gap: 8px;
+}
+
+.role-tag .role-icon {
+    font-size: 1.1rem;
+}
+
+.role-tag .remove-role {
+    background: none;
+    border: none;
+    color: #1976d2;
+    font-size: 1.2rem;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    margin-left: 4px;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+.role-tag .remove-role:hover {
+    background-color: #bbdefb;
+}
+
+.no-roles {
+    color: #6c757d;
+    font-style: italic;
+    padding: 8px;
+}
+
+/* Role selector */
+.role-selector {
+    margin-top: 10px;
+}
+
+#add-role-btn {
+    width: 100%;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+#add-role-btn i {
+    font-size: 0.9rem;
+}
+
+/* Role select dropdown */
+#role-select {
+    width: 100%;
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: 1px solid #ced4da;
+    background-color: #fff;
+    font-size: 1rem;
+}
+
+#role-select:focus {
+    border-color: #80bdff;
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.modal-content {
+    background-color: #fff;
+    max-width: 500px;
+    margin: 20px auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    padding: 20px;
+}
+
+.auth-container {
+    padding: 20px;
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.auth-header h2 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.auth-header p {
+    color: #666;
+    margin: 0;
+}
+
+/* Role selection styles */
+.roles-container {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    background-color: #fff;
+}
+
+.role-options {
+    display: grid;
+    gap: 10px;
+}
+
+.role-checkbox {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    background-color: #f8f9fa;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.role-checkbox:hover {
+    background-color: #e9ecef;
+}
+
+.role-checkbox input[type="checkbox"] {
+    margin-right: 10px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.role-checkbox label {
+    margin: 0;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #495057;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Form styles */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #495057;
+    font-weight: 500;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.15s ease-in-out;
+}
+
+.form-control:focus {
+    border-color: #80bdff;
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Button styles */
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+/* Close button */
+.close {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+}
+
+.close:hover {
+    color: #333;
+}
+
+/* Error message */
+.error-message {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 5px;
+    display: none;
+}

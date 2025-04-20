@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriXpress Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+        .role-selector {
+            max-width: 200px;
+        }
+        #imagePreview {
+            max-width: 300px;
+            max-height: 200px;
+            margin-top: 10px;
+        }
+        .produce-card {
+            transition: transform 0.2s;
+        }
+        .produce-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+        <div class="container">
+            <a class="navbar-brand" href="#">AgriXpress</a>
+            <div class="d-flex align-items-center">
+                <select id="roleSelector" class="form-select role-selector me-3">
+                    <!-- Roles will be populated by JavaScript -->
+                </select>
+                <span class="text-white me-3" id="userInfo"></span>
+                <button class="btn btn-outline-light" onclick="logout()">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <!-- Farmer Dashboard -->
+        <div id="farmerDashboard" class="dashboard-section" style="display: none;">
+            <div class="row mb-4">
+                <div class="col">
+                    <h2>Farmer Dashboard</h2>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProduceModal">
+                        <i class="fas fa-plus"></i> Add New Produce
+                    </button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5>My Produce Listings</h5>
+                        </div>
+                        <div class="card-body">
+                            <div id="farmerProduceList" class="row"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5>My Orders</h5>
+                        </div>
+                        <div class="card-body">
+                            <div id="farmerOrders"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Trader/Customer Dashboard -->
+        <div id="traderDashboard" class="dashboard-section" style="display: none;">
+            <div class="row mb-4">
+                <div class="col">
+                    <h2>Trader/Customer Dashboard</h2>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row g-3">
+                                <div class="col-md-3">
+                                    <input type="text" id="searchCrop" class="form-control" placeholder="Search crops...">
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="number" id="minPrice" class="form-control" placeholder="Min price">
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="number" id="maxPrice" class="form-control" placeholder="Max price">
+                                </div>
+                                <div class="col-md-2">
+                                    <button class="btn btn-primary" onclick="searchProduce()">
+                                        <i class="fas fa-search"></i> Search
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="produceList" class="row"></div>
+        </div>
+
+        <!-- Service Partner Dashboard -->
+        <div id="servicePartnerDashboard" class="dashboard-section" style="display: none;">
+            <h2>Service Partner Dashboard</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5>My Fleet</h5>
+                            <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addFleetModal">
+                                <i class="fas fa-plus"></i> Add Vehicle
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <div id="fleetList"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5>Available Jobs</h5>
+                        </div>
+                        <div class="card-body">
+                            <div id="jobsList"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin Dashboard -->
+        <div id="adminDashboard" class="dashboard-section" style="display: none;">
+            <h2>Admin Dashboard</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5>User Management</h5>
+                        </div>
+                        <div class="card-body">
+                            <div id="usersList"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5>Disputes</h5>
+                        </div>
+                        <div class="card-body">
+                            <div id="disputesList"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Produce Modal -->
+    <div class="modal fade" id="addProduceModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add New Produce</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addProduceForm">
+                        <div class="mb-3">
+                            <label class="form-label">Crop Name</label>
+                            <input type="text" class="form-control" name="cropName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Quantity</label>
+                            <input type="number" class="form-control" name="quantity" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Unit</label>
+                            <select class="form-select" name="unit" required>
+                                <option value="kg">Kilograms (kg)</option>
+                                <option value="tons">Tons</option>
+                                <option value="pieces">Pieces</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Price per Unit (₹)</label>
+                            <input type="number" class="form-control" name="price" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Dispatch Date</label>
+                            <input type="date" class="form-control" name="dispatchDate" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Image (Required)</label>
+                            <input type="file" class="form-control" name="image" accept="image/*" required onchange="previewImage(event)">
+                            <img id="imagePreview" style="display: none;">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Description</label>
+                            <textarea class="form-control" name="description" rows="3"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" onclick="addProduce()">Add Produce</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Fleet Modal -->
+    <div class="modal fade" id="addFleetModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add New Vehicle</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addFleetForm">
+                        <div class="mb-3">
+                            <label class="form-label">Vehicle Type</label>
+                            <select class="form-select" name="vehicleType" required>
+                                <option value="truck">Truck</option>
+                                <option value="van">Van</option>
+                                <option value="pickup">Pickup</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Capacity (tons)</label>
+                            <input type="number" class="form-control" name="capacity" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" onclick="addFleet()">Add Vehicle</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>
