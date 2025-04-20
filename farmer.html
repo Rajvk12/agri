@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmer Dashboard</title>
+    <link rel="stylesheet" href="farmer.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fas fa-leaf"></i>
+                <h1>Farmer Dashboard</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li data-tab="ai-suggestions" class="active">
+                        <i class="fas fa-robot"></i> AI Crop Suggestions
+                    </li>
+                    <li data-tab="my-products">
+                        <i class="fas fa-seedling"></i> My Products
+                    </li>
+                    <li data-tab="add-product">
+                        <i class="fas fa-plus-circle"></i> Add New Product
+                    </li>
+                    <li data-tab="incoming-orders">
+                        <i class="fas fa-shopping-basket"></i> Incoming Orders
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <!-- AI Suggestions Section -->
+            <section id="ai-suggestions" class="tab-content active">
+                <h2>AI Crop Suggestions 🤖</h2>
+                <div class="card">
+                    <form id="suggestion-form">
+                        <div class="form-group">
+                            <label for="soil-type">Soil Condition:</label>
+                            <select id="soil-type" required>
+                                <option value="">Select soil type</option>
+                                <option value="black">Black Soil</option>
+                                <option value="red">Red Soil</option>
+                                <option value="alluvial">Alluvial Soil</option>
+                                <option value="sandy">Sandy Soil</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="season">Season:</label>
+                            <select id="season" required>
+                                <option value="">Select season</option>
+                                <option value="summer">Summer</option>
+                                <option value="winter">Winter</option>
+                                <option value="monsoon">Monsoon</option>
+                            </select>
+                        </div>
+                        <button type="submit">Get Suggestions</button>
+                    </form>
+                    <div id="suggestions-result" class="suggestions-container"></div>
+                </div>
+            </section>
+
+            <!-- My Products Section -->
+            <section id="my-products" class="tab-content">
+                <h2>My Products 🌾</h2>
+                <div class="products-grid" id="products-list">
+                    <!-- Products will be populated here -->
+                </div>
+            </section>
+
+            <!-- Add Product Section -->
+            <section id="add-product" class="tab-content">
+                <h2>Add New Product 🌱</h2>
+                <div class="card">
+                    <form id="add-product-form">
+                        <div class="form-group">
+                            <label for="product-name">Product Name:</label>
+                            <input type="text" id="product-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="quantity">Quantity (kg):</label>
+                            <input type="number" id="quantity" min="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="price">Price per kg (₹):</label>
+                            <input type="number" id="price" min="0" step="0.01" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="availability-date">Available From:</label>
+                            <input type="date" id="availability-date" required>
+                        </div>
+                        <button type="submit">Add Product</button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Incoming Orders Section -->
+            <section id="incoming-orders" class="tab-content">
+                <h2>Incoming Orders 📦</h2>
+                <div class="orders-container" id="orders-list">
+                    <!-- Orders will be populated here -->
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="farmer.js"></script>
+</body>
+</html>

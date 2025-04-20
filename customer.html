@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Dashboard</title>
+    <link rel="stylesheet" href="customer.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fas fa-shopping-basket"></i>
+                <h1>Customer Hub</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li data-tab="browse-products" class="active">
+                        <i class="fas fa-store"></i> Browse Products
+                    </li>
+                    <li data-tab="my-orders">
+                        <i class="fas fa-shopping-cart"></i> My Orders
+                    </li>
+                    <li data-tab="saved-sellers">
+                        <i class="fas fa-heart"></i> Saved Sellers
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <!-- Browse Products Tab -->
+            <section id="browse-products" class="tab-content active">
+                <h2>Browse Products 🛒</h2>
+                <div class="filters card">
+                    <div class="filter-grid">
+                        <div class="form-group">
+                            <label for="product-search">Search Products:</label>
+                            <input type="text" id="product-search" placeholder="Search by name...">
+                        </div>
+                        <div class="form-group">
+                            <label for="category-filter">Category:</label>
+                            <select id="category-filter">
+                                <option value="">All Categories</option>
+                                <option value="vegetables">Vegetables</option>
+                                <option value="fruits">Fruits</option>
+                                <option value="grains">Grains</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="sort-by">Sort By:</label>
+                            <select id="sort-by">
+                                <option value="price-low">Price: Low to High</option>
+                                <option value="price-high">Price: High to Low</option>
+                                <option value="rating">Rating</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div id="products-grid" class="products-grid"></div>
+            </section>
+
+            <!-- My Orders Tab -->
+            <section id="my-orders" class="tab-content">
+                <h2>My Orders 📦</h2>
+                <div class="order-status-tabs">
+                    <button class="status-tab active" data-status="active">Active</button>
+                    <button class="status-tab" data-status="completed">Completed</button>
+                </div>
+                <div id="orders-grid" class="orders-grid"></div>
+            </section>
+
+            <!-- Saved Sellers Tab -->
+            <section id="saved-sellers" class="tab-content">
+                <h2>Saved Sellers ❤️</h2>
+                <div id="sellers-grid" class="sellers-grid"></div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Product Details Modal -->
+    <div id="product-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div id="product-details"></div>
+            <div class="quantity-selector">
+                <label for="quantity">Quantity:</label>
+                <div class="quantity-controls">
+                    <button onclick="decrementQuantity()">-</button>
+                    <input type="number" id="quantity" value="1" min="1">
+                    <button onclick="incrementQuantity()">+</button>
+                </div>
+            </div>
+            <button class="primary-btn" onclick="addToCart()">
+                <i class="fas fa-cart-plus"></i> Add to Cart
+            </button>
+        </div>
+    </div>
+
+    <script src="customer.js"></script>
+</body>
+</html>

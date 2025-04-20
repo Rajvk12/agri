@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trader Dashboard</title>
+    <link rel="stylesheet" href="trader.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fas fa-store"></i>
+                <h1>Trader Hub</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li data-tab="available-products" class="active">
+                        <i class="fas fa-box"></i> Available Products
+                    </li>
+                    <li data-tab="bulk-orders">
+                        <i class="fas fa-shopping-cart"></i> Place Bulk Orders
+                    </li>
+                    <li data-tab="order-fulfillment">
+                        <i class="fas fa-truck"></i> Order Fulfillment
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <!-- Available Products Tab -->
+            <section id="available-products" class="tab-content active">
+                <h2>Available Products 🏪</h2>
+                <div class="filters card">
+                    <div class="filter-grid">
+                        <div class="form-group">
+                            <label for="product-search">Search Products:</label>
+                            <input type="text" id="product-search" placeholder="Search by name...">
+                        </div>
+                        <div class="form-group">
+                            <label for="category-filter">Category:</label>
+                            <select id="category-filter">
+                                <option value="">All Categories</option>
+                                <option value="vegetables">Vegetables</option>
+                                <option value="fruits">Fruits</option>
+                                <option value="grains">Grains</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="sort-by">Sort By:</label>
+                            <select id="sort-by">
+                                <option value="price-low">Price: Low to High</option>
+                                <option value="price-high">Price: High to Low</option>
+                                <option value="quantity">Quantity Available</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div id="products-grid" class="products-grid"></div>
+            </section>
+
+            <!-- Bulk Orders Tab -->
+            <section id="bulk-orders" class="tab-content">
+                <h2>Place Bulk Orders 🛒</h2>
+                <div class="bulk-order-container">
+                    <div class="selected-products card">
+                        <h3>Selected Products</h3>
+                        <div id="cart-items"></div>
+                        <div class="cart-summary">
+                            <div class="total">Total: ₹<span id="cart-total">0</span></div>
+                            <button class="primary-btn">Place Order</button>
+                        </div>
+                    </div>
+                    <div class="selected-farmers card">
+                        <h3>Selected Farmers</h3>
+                        <div id="selected-farmers-list"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Order Fulfillment Tab -->
+            <section id="order-fulfillment" class="tab-content">
+                <h2>Order Fulfillment 📦</h2>
+                <div class="order-status-tabs">
+                    <button class="status-tab active" data-status="processing">Processing</button>
+                    <button class="status-tab" data-status="shipped">Shipped</button>
+                    <button class="status-tab" data-status="delivered">Delivered</button>
+                </div>
+                <div class="orders-grid" id="orders-list"></div>
+            </section>
+        </main>
+    </div>
+    <script src="trader.js"></script>
+</body>
+</html>
